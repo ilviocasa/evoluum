@@ -11,6 +11,7 @@ public class EvoluumApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		EvoluumApplication.main(new String[] {});
 	}
 
 }

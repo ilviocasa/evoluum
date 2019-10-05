@@ -1,5 +1,11 @@
 package com.github.ilviocasa.resource;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -11,13 +17,14 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
  * @author silvio
  *
  */
-public class CidadeCsvDataFormat implements DataFormat{
+public class CidadeCsvDataFormat implements DataFormat {
 	
 	private static final char COMMA = ',';
 	
-	Cidade[] cidades;
+	List<Cidade> cidades;
 	
-	public CidadeCsvDataFormat(Cidade[] cidades) {
+	public CidadeCsvDataFormat(List<Cidade> cidades) {
+		assertThat(cidades, is(notNullValue()));
 		this.cidades = cidades;
 	}
 
@@ -31,8 +38,11 @@ public class CidadeCsvDataFormat implements DataFormat{
 		StringBuilder builder = new StringBuilder();
 		
 		builder.append(getHeader());
-		builder.append(System.lineSeparator());
-		builder.append(data);
+		
+		if (!data.isEmpty()) {			
+			builder.append(System.lineSeparator());
+			builder.append(data);
+		}
 		
 		return builder.toString().getBytes();
 	}
