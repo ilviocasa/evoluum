@@ -11,6 +11,7 @@ public class SwaggerStrings {
 	public static final String TAG_CIDADES = "cidades";
 	public static final String DESC_CONTROLLER_CIDADES = "Endpoint referente a cidades do Brasil.";
 	public static final String DESC_CIDADES = "Lista todas as cidades do Brasil";
+	public static final String DESC_CIDADES_CSV = "Download da lista todas as cidades do Brasil em formato csv";
 	public static final String DESC_CIDADES_BY_NAME = "Procura a cidade pelo nome";
 	public static final String RESP_OK_CIDADES = "Retorna a lista em formato JSON. A lista pode estar vazia caso o serviços externos fiquem offline.";
 	public static final String RESP_OK_CIDADES_CSV = "Retorna a lista em formato CSV. A lista pode estar vazia caso o serviços externos fiquem offline.";

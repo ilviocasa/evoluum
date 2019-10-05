@@ -3,6 +3,7 @@ package com.github.ilviocasa.controller;
 import static com.github.ilviocasa.core.ApiLinksV1.CIDADES;
 import static com.github.ilviocasa.core.ApiLinksV1.CIDADES_CSV;
 import static com.github.ilviocasa.core.SwaggerStrings.DESC_CIDADES;
+import static com.github.ilviocasa.core.SwaggerStrings.DESC_CIDADES_CSV;
 import static com.github.ilviocasa.core.SwaggerStrings.DESC_CIDADES_BY_NAME;
 import static com.github.ilviocasa.core.SwaggerStrings.PARAM_NOME_CIDADE;
 import static com.github.ilviocasa.core.SwaggerStrings.RESP_NOT_FOUND_CIDADES_BY_NAME;
@@ -10,6 +11,7 @@ import static com.github.ilviocasa.core.SwaggerStrings.RESP_OK_CIDADES;
 import static com.github.ilviocasa.core.SwaggerStrings.RESP_OK_CIDADES_BY_NAME;
 import static com.github.ilviocasa.core.SwaggerStrings.RESP_OK_CIDADES_CSV;
 import static com.github.ilviocasa.core.SwaggerStrings.TAG_CIDADES;
+import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 
 import java.io.IOException;
 import java.util.List;
@@ -63,12 +65,15 @@ public class CidadeController {
 	}
 
 	@GetMapping(value = CIDADES_CSV)
-	@ApiOperation(DESC_CIDADES)
+	@ApiOperation(DESC_CIDADES_CSV)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = RESP_OK_CIDADES_CSV) })
 	public void allCSV(HttpServletResponse response) throws IOException {
 
 		LOG.info("GET - " + CIDADES_CSV);
+		
+		String filename = "cidades.csv";
 		response.setContentType("text/csv; charset=utf-8");
+		response.setHeader(CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"");
 
 		List<Cidade> cidades = cidadeService.findAll();
 
