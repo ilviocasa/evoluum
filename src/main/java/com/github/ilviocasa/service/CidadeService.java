@@ -40,13 +40,13 @@ public class CidadeService {
 		LOG.info("Try to find all cidades");
 		List<Cidade> cidades = new ArrayList<>();
 		
-		List<ExtBase> estados = estadoBaseIbgeWebClient.findAll();
-		LOG.debug(String.format("Amount of estados found: %d", estados.size()));
+		ExtBase[] estados = estadoBaseIbgeWebClient.findAll();
+		LOG.debug(String.format("Amount of estados found: %d", estados.length));
 		
 		for (ExtBase estado : estados) {
 			int id = estado.getId();
-			List<ExtMunicipio> municipios = municipioIbgeWebClient.findAllById(id);
-			LOG.debug(String.format("Amount of municipios found: %d", municipios.size()));
+			ExtMunicipio[] municipios = municipioIbgeWebClient.findAllById(id);
+			LOG.debug(String.format("Amount of municipios found: %d", municipios.length));
 			
 			for (ExtMunicipio municipio : municipios) {
 				CidadeAdapter adapter = new CidadeAdapter(municipio);
@@ -54,7 +54,7 @@ public class CidadeService {
 				cidades.add(cidade);
 				LOG.debug(String.format("Cidade added: %s", cidade));
 			}
-			LOG.info(String.format("Added %d cidades to the list by UF id: %d", municipios.size(), id));
+			LOG.info(String.format("Added %d cidades to the list by UF id: %d", municipios.length, id));
 		}
 
 		LOG.info(String.format("Total amount of cidades added to list: %d", cidades.size()));
@@ -64,13 +64,13 @@ public class CidadeService {
 	public int findFirst(String name) {
 		LOG.info(String.format("Try to find a cidade by name '%s'", name));
 		
-		List<ExtBase> estados = estadoBaseIbgeWebClient.findAll();
-		LOG.debug(String.format("Amount of estados found: %d", estados.size()));
+		ExtBase[] estados = estadoBaseIbgeWebClient.findAll();
+		LOG.debug(String.format("Amount of estados found: %d", estados.length));
 		
 		for (ExtBase estado : estados) {
 			int id = estado.getId();
-			List<ExtBase> municipios = municipioBaseIbgeWebClient.findAllById(id);
-			LOG.debug(String.format("Amount of municipios found: %d", municipios.size()));
+			ExtBase[] municipios = municipioBaseIbgeWebClient.findAllById(id);
+			LOG.debug(String.format("Amount of municipios found: %d", municipios.length));
 			
 			for (ExtBase municipio : municipios) {
 				if (name.equals(municipio.getNome())) {

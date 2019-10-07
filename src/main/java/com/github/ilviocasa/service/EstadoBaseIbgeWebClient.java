@@ -1,15 +1,18 @@
 package com.github.ilviocasa.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static org.springframework.cache.interceptor.SimpleKey.EMPTY;
 
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -32,25 +35,34 @@ public class EstadoBaseIbgeWebClient {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EstadoBaseIbgeWebClient.class);
 	
+	@Autowired
+	private CacheManager cacheManager;
+
+	@CachePut("estadosCache")
 	@HystrixCommand(fallbackMethod = "reliable")
-	public List<ExtBase> findAll() {
+	public ExtBase[] findAll() {
 		HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory(
 				HttpClientBuilder.create().build());
 		RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
 		String resource = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
 
 		ResponseEntity<ExtBase[]> response = restTemplate.getForEntity(resource, ExtBase[].class);
-
 		assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
 		
 		ExtBase[] body = response.getBody();
+		assertThat(body.length, is(not(0)));
 		
-		return new ArrayList<ExtBase>(Arrays.asList(body));
+		return body;
 	}
-
 	
-	public List<ExtBase> reliable() {
-		LOG.warn("Circuit breaker detected!");
-		return new ArrayList<ExtBase>();
+	public ExtBase[] reliable() {
+		Cache cache = cacheManager.getCache("estadosCache");
+		if (cache == null || cache.get(EMPTY) == null) {
+			LOG.warn("Circuit breaker detected and no data in cache, data may be inconsistent");
+			return new ExtBase[0];
+		}
+		
+		LOG.warn("Circuit breaker detected");
+		return cache.get(EMPTY, ExtBase[].class);
 	}
 }

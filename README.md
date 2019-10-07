@@ -1,5 +1,10 @@
 # Evoluum Challenge
 
+## Project analysis
+```
+https://docs.google.com/document/d/1dRbxKWoVJvRDCeuiniMw_3hI-5NU8XIEpYcq3MDg07k/edit?usp=sharing
+```
+
 ## Compile
 ```
 mvn clean install
