@@ -12,6 +12,7 @@ mvnw clean install
 
 ## Run Spring Boot
 ```
+cd target
 java -jar evoluum-challenge-1.0.0.RELEASE.jar
 ```
 
