@@ -22,5 +22,6 @@ http://127.0.0.1:8080/api/swagger-ui.html
 
 ## Contact
 
-Silvio Casamassima :it:
+Silvio Casamassima  :it:
+
 casamassima.silvio@gmail.com 
