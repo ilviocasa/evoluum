@@ -8,12 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.ilviocasa.exception.CidadeNotFoundException;
+import com.github.ilviocasa.external.ExtBase;
+import com.github.ilviocasa.external.ExtMunicipio;
 import com.github.ilviocasa.resource.Cidade;
 import com.github.ilviocasa.resource.CidadeAdapter;
-
-import exception.CidadeNotFoundException;
-import external.ExtBase;
-import external.ExtMunicipio;
 
 /**
  * The Cidade Service is responsible to implements all lookup routines about cidade

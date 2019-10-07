@@ -1,4 +1,4 @@
-package external;
+package com.github.ilviocasa.external;
 
 /**
  * The External Estado Resource contains info about estado

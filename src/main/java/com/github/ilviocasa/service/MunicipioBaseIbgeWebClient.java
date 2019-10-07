@@ -18,9 +18,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.github.ilviocasa.external.ExtBase;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
-import external.ExtBase;
 
 /**
  * The Municipio Base Ibge Web Client is responsible to call the IBGE API and 

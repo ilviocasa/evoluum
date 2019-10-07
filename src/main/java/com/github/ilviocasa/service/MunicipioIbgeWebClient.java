@@ -18,9 +18,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.github.ilviocasa.external.ExtMunicipio;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
-import external.ExtMunicipio;
 
 /**
  * The Municipio Ibge Web Client implements is responsible to call the 

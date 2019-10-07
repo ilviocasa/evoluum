@@ -1,4 +1,4 @@
-package external;
+package com.github.ilviocasa.external;
 
 public class ExtMunicipio extends ExtBase {
 

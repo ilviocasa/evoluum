@@ -4,11 +4,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import external.ExtEstado;
-import external.ExtMesorregiao;
-import external.ExtMicrorregiao;
-import external.ExtMunicipio;
-import external.ExtRegiao;
+import com.github.ilviocasa.external.ExtEstado;
+import com.github.ilviocasa.external.ExtMesorregiao;
+import com.github.ilviocasa.external.ExtMicrorregiao;
+import com.github.ilviocasa.external.ExtMunicipio;
+import com.github.ilviocasa.external.ExtRegiao;
 
 public class CidadeAdapter {
 

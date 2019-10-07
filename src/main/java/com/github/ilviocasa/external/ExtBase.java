@@ -1,4 +1,4 @@
-package external;
+package com.github.ilviocasa.external;
 
 /**
  * The Extarnal Base Resource contains commons info of a generic external resource

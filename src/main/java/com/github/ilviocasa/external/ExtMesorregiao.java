@@ -1,4 +1,4 @@
-package external;
+package com.github.ilviocasa.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
